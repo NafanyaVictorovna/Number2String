@@ -1,6 +1,0 @@
-13:09:37 **** Incremental Build of configuration Debug for project HelloWorld ****
-make all 
-make: Цель «all» не требует выполнения команд.
-
-13:09:37 Build Finished (took 337ms)
-

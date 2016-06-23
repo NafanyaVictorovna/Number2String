@@ -1,5 +1,0 @@
-package digit.parser;
-
-public interface TransformNumber {
-
-}

@@ -1,6 +1,0 @@
-package digit.parser;
-
-public interface TransformNumber {
-	String Number2String(Number num);
-	String triad2String(int n, int gender);
-}
