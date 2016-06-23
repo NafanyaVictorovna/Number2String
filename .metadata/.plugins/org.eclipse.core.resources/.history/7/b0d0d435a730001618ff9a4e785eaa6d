@@ -1,0 +1,5 @@
+package digit.parser;
+
+public abstract class AbstractTransformNumber {
+
+}

@@ -36,11 +36,15 @@ public class TransformNumberRuTest {
 	@Test
 	public void testNumber2String() {
 		window.clearTextArea();
+		String str = "";
 		for(int i=0; i<transform.getRow(); i++){
-				String str = transform.Number2String(Float.parseFloat(testArray[i][0]));
+			if(transform.checkString(testArray[i][0])){
+				str = transform.Number2String(Double.parseDouble(testArray[i][0]));
 				if(str.equals(testArray[i][1])){text = "success test: " 
 							+testArray[i][1] +" equals "+ str + "\n";}
-			else{text = "test failed: " + testArray[i][1] + " not equals " + str + "\n";}
+				else{text = "test failed: " + testArray[i][1] + " not equals " + str + "\n";}
+			}
+			else {text = "test failed: not number\n";}
 			window.setText(text);
 		}	
 	}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;digitparser&apos; to &apos;digit.parser&apos;&#x0A;- Original project: &apos;DigitalParser&apos;&#x0A;- Original element: &apos;DigitalParser/src/digitparser&apos;&#x0A;- Renamed element: &apos;DigitalParser/src/digit.parser&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;digitparser&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;digitparser" name="digit.parser" qualified="false" references="true" stamp="1465679467328" textual="false" version="1.0"/>
+</session>

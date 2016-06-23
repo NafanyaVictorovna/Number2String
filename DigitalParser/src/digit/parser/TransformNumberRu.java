@@ -43,7 +43,7 @@ public class TransformNumberRu extends AbstractTransformNumber{
 		return hundreds[n];
 	}
 
-	protected String getUnitTitle(int index, float count) {
+	protected String getUnitTitle(int index, double count) {
 		if(count%100 > 4 && count%100 < 21){
 			return forms[index][2];
 		}

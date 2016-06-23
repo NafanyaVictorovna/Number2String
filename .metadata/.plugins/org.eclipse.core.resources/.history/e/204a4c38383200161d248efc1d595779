@@ -1,0 +1,59 @@
+import digit.parser.TransformNumber;
+/*
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junitext.XMLParameters;
+import org.junitext.runners.XMLParameterizedRunner;
+ */
+/*
+Тестиреумый класс:
+package calc;
+ 
+public class Calc {
+ 
+    public int Sum(int x, int y){
+        return (x+y);
+    }   
+}
+ */
+@RunWith(XMLP)
+public class TransformNumberTest {
+	public static void test(Class c){
+		TransformNumber transform;
+		try{
+			transform = (TransformNumber)c.newInstance();
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
+		for(int i=0; i<5; i++){
+			float number = (float)(Math.random()*10000000F)/100;
+			System.out.println(number + "\t" + transform.Number2String(number));
+		}
+		
+	}
+	
+}
+
+/*
+@RunWith(XMLParameterizedRunner.class)
+public class CalcTest{
+		  
+	
+	  private int fInput;
+	  private int fExpected;
+
+	  @XMLParameters("/junit/input.xml")
+	  public CalcTest(String input, String expected) {
+	    fInput= Integer.parseInt(input);
+	    fExpected= Integer.parseInt(expected);
+	  }
+	
+		@Test
+		public void testSum() {
+			assertEquals(fInput,fExpected);
+		}
+	
+}
+ */

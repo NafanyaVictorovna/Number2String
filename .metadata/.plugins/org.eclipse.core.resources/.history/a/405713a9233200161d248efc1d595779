@@ -1,0 +1,23 @@
+import java.io.FileNotFoundException;
+
+import digit.parser.TransformNumberRu;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello digital parser");
+		TransformNumberRu transform = new TransformNumberRu();
+		try {
+			transform.readFile("resources/Degrees.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

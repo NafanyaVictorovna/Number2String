@@ -1,0 +1,48 @@
+package digit.parser;
+
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.util.Map;
+
+import org.junit.Test;
+
+import view.Window;
+
+public class TransformNumberRuTest {
+	private Map<Float, String> map;
+
+	@Test
+	public void testNumber2String() {
+ 		Window window = new Window();
+		map = window.getMap();
+		TransformNumberRu transform = new TransformNumberRu();
+		try {
+			transform.readFile("resources/Degrees.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		//
+		for(Map.Entry<Float, String> entry: map.entrySet()){
+			transform.Number2String(entry.getKey());
+		}
+	}
+
+}
+/*
+ 		Window window = new Window();
+		map = window.getMap();
+		// TODO Auto-generated method stub
+		System.out.println("Hello digital parser");
+		TransformNumberRu transform = new TransformNumberRu();
+		try {
+			transform.readFile("resources/Degrees.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//
+		for(Map.Entry<Float, String> entry: map.entrySet()){
+			transform.Number2String(entry.getKey());
+		}
+ */

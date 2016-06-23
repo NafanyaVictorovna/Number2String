@@ -1,0 +1,64 @@
+package digit.parser;
+
+public class TransformNumberRu extends AbstractTransformNumber{
+	
+	final String[][] units = {
+			{"ноль","один","два","три","четыре","пять","шесть","семь","восемь","девять"},
+			{"ноль","одна","две","три","четыре","пять","шесть","семь","восемь","девять"}
+	};
+	
+	final String[] hundreds = {"", "сто","двести","триста","четыреста","пятьсот",
+								"шестьсот","семьсот","восемьсот","девятьсот"};
+	
+	final String[] decades_11_19 = {"","одиннадцать","двенадцать","тринадцать",
+									"четырнадцать","пятнадцать","шестнадцать",
+									"семнадцать","восемнадцать","девятнадцать"};
+	
+	final String[] decades = {"","десять","двадцать","тридцать","сорок","пятьдесят",
+								"шестьдесят","семьдесят","восемьдесят","девяносто"};
+	
+	/*
+//you - read from file!!!!!
+    final String[][] forms = {
+        {"", "", "", "0"},
+        {"", "", "", "0"},
+        {"тысяча", "тысячи", "тысяч", "1"},
+        {"миллион", "миллиона", "миллионов", "0"},
+        {"миллиард", "миллиарда", "миллиардов", "0"},
+        {"триллион", "триллиона", "триллионов", "0"},
+    };
+	 */
+
+	protected String getUnits(int n, int gender) {
+		return units[gender][n];
+	}
+
+	protected String getDecades(int n) {
+		return decades[n];
+	}
+
+	protected String get11_19(int n) {
+		return decades_11_19[n];
+	}
+
+	protected String getHundreds(int n) {
+		return hundreds[n];
+	}
+
+	protected String getUnitTitle(int index, float count) {
+		if(count%100 > 4 && count%100<21){
+			return smth[index][2];
+		}
+		switch((int)(count%10)){
+		case 1: return smth[index][0];
+		case 2: case 3: case 4: return smth[index][1];
+		default: return smth[index][2];
+		}
+	}
+
+	protected int getGender(int index) {
+		return smth[index][3];
+	}
+	
+
+}

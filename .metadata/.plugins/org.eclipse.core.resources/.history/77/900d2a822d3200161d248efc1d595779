@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tests>
+  <test>
+     <string id="input" value="10" />
+     <string id="expected" value="10" />
+  </test>
+    <test>
+     <string id="input" value="10" />
+     <string id="expected" value="1" />
+  </test>
+    <test>
+     <string id="input" value="1" />
+     <string id="expected" value="1" />
+  </test>
+</tests>

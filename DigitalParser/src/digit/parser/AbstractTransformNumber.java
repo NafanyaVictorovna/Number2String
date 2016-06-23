@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractTransformNumber implements TransformNumber{
 
@@ -13,27 +15,43 @@ public abstract class AbstractTransformNumber implements TransformNumber{
 	abstract protected String getDecades(int n);
 	abstract protected String get11_19(int n);
 	abstract protected String getHundreds(int n);
-	abstract protected String getUnitTitle(int index, float count);
+	abstract protected String getUnitTitle(int index, double count);
 	abstract protected int getGender(int index);
 	private File file;
+	private List<ArrayList<String>> list;
 	private String[][] array;
-	private int str_i =0;
 	
 	public int getRow(){
-		return str_i;
+		return list.size();
+	}
+	
+	public boolean checkString(String str){
+		try{
+			Double.parseDouble(str);
+		} catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 
-	public String Number2String(float num) {
+	public String Number2String(double num) {
 		String result = "";
 		int index = 0;
 		if(num == 0){
-			result = getUnits(0, 0) + " " + getUnitTitle(1, 0);
+			result = getUnits(0, 0) + "ноль ";
 		}
-		while(num >= 1){
-			String triad = triad2String((int)(num%1000),getGender(index),index<1);
+		if(Math.abs(num) > 0 && Math.abs(num) < 1){
+			result = "не целое";
+		}
+		while(Math.abs(num) >= 1){
+			String triad = triad2String((int)(Math.abs(num)%1000),getGender(index),index<1);
+			if(num % 1000 != 0)
 			result = triad + getUnitTitle(index, num % 1000) + result;
 			num = num/1000;	
 			index++;
+		}		
+		if(num < 0){
+			result = "минус " + result;
 		}
 		return result;
 	}
@@ -48,9 +66,11 @@ public abstract class AbstractTransformNumber implements TransformNumber{
 			if(n%100>10 && n%100<20){
 				result += get11_19(n % 10) + " ";
 			} else 	result += getDecades(n%100/10) + " "; 
-		} if(n % 10 > 0 && n % 10 < 10)
+		} 
+		if(n != 0 && n % 10 <= 9 )
 		{
-			result += getUnits(n%10, gender) + " ";
+			if((n%100>10 && n%100<20) || n%10==0){ result += "";}
+			else result += getUnits(n%10, gender) + " ";
 		}
 		return result;
 	}
@@ -63,26 +83,19 @@ public abstract class AbstractTransformNumber implements TransformNumber{
 	}
 
 	public String[][] readFile(String fileName) throws FileNotFoundException{
-		StringBuilder builder = new StringBuilder();
-		int str_j = 0;
-		str_i = 0;
+		list = new ArrayList<ArrayList<String>>();
+		int str_j = 0, str_i = 0;
 		fileExists(fileName);
 		try{
 			BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()));
 			try{
 				String str;
-				while((str = in.readLine()) != null){		
-					if(str_j == 0){
-						for(int i = 0; i<str.length(); i++){	
-							if(str.charAt(i) == ',')
-								str_j++;
-						}str_j++;
+				while((str = in.readLine()) != null){
+					if(!str.equals("")){
+						str_i++;
+						if(!str.contains(",")) str = str.concat(", ");
+						list.add(new ArrayList<String>(Arrays.asList(str.split(",")))); 
 					}
-					for(int i =0; i< str.length(); i++){
-						if(str.charAt(i) == ';')
-							str_i++;
-					}
-					builder.append(str);
 				}
 			} finally{
 				in.close();
@@ -90,18 +103,18 @@ public abstract class AbstractTransformNumber implements TransformNumber{
 		} catch(IOException e){
 			throw new RuntimeException(e);
 		}
-		String str = builder.toString();
+		str_j = list.get(0).size();
 		array = new String[str_i][str_j];
-			int j = 0, i = 0;
-			for(String string: Arrays.toString(str.split(";")).split(",")){
-				string = string.replace("[","");
-				string = string.replace("]","");
-				array[i][j] = string; 
-				j++;
-				if(j == str_j){i++; j = 0;}
-				if(i >= str_i){break;}
+		for(int i=0; i<str_i; i++){
+			for(int j =0; j<str_j; j++)
+			if(!list.get(i).get(j).isEmpty()){
+			array[i][j] = list.get(i).get(j);
+			} else {
+				array[i][j] = "";
 			}
-			return array;
+		}
+		return array;
 	}
 	
 }
+

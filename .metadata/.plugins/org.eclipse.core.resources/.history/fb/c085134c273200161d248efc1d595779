@@ -1,0 +1,42 @@
+import javax.management.RuntimeErrorException;
+
+import digit.parser.TransformNumber;
+
+
+public class TransformNumberTest {
+	public static void test(Class c){
+		TransformNumber transform;
+		try{
+			transform = (TransformNumber)c.newInstance();
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
+		for(int i=0; i<5; i++){
+			double number = (double)((float)(Math.random()*10000000F))/100;
+			System.out.println(number + "\t" + transform.Number2String(num));
+		}
+		
+	}
+	
+}
+
+/*
+ *public class WritableSummTest {
+    public static void test(Class cls) {
+        WritableSumm w;
+        try {
+            w = (WritableSumm)cls.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < 5; i++) {
+            double n = (double)((long)(Math.random() * 1000000000L)) / 100;
+            System.out.println(n + "\t" + w.numberToString(n));
+        }
+        System.out.println(1000 + "\t" + w.numberToString(1000));
+        System.out.println(0 + "\t" + w.numberToString(0));
+        System.out.println();
+    }
+
+}
+ */
